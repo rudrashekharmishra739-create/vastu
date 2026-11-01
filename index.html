@@ -562,7 +562,13 @@ footer .copy{border-color:rgba(239,96,36,.5)}
 }
 
 /* ---- Pill navigation (PillNav-inspired) ---- */
-.nav-links.pill-nav{display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:rgba(251,250,247,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(239,96,36,.35);box-shadow:var(--shadow-sm)}
+.brand{flex:0 0 auto;min-width:0}
+.nav-links.pill-nav{display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:rgba(251,250,247,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(239,96,36,.35);box-shadow:var(--shadow-sm);flex:0 1 auto;max-width:100%;overflow-x:auto}
+.nav-cta{flex:0 0 auto}
+.nav-links.pill-nav::-webkit-scrollbar{display:none}
+.nav-links.pill-nav a{padding:10px 16px;border-radius:999px;background:transparent;color:var(--ink-soft);font-weight:500;transition:.28s cubic-bezier(.22,.7,.3,1);white-space:nowrap}
+.lang-btn{padding:8px 12px;border-radius:999px;border:1px solid rgba(239,96,36,.5);background:linear-gradient(180deg,var(--blue-700),var(--blue-600));color:var(--orange-300);font-size:.78rem;font-weight:700;letter-spacing:.08em;cursor:pointer;transition:.25s;white-space:nowrap}
+.lang-btn:hover{transform:translateY(-1px)}
 .nav-links.pill-nav a{padding:10px 16px;border-radius:999px;background:transparent;color:var(--ink-soft);font-weight:500;transition:.28s cubic-bezier(.22,.7,.3,1)}
 .nav-links.pill-nav a:hover{background:linear-gradient(180deg,var(--blue-700),var(--blue-600));color:var(--orange-300);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
 .nav-links.pill-nav a.active{background:linear-gradient(180deg,var(--blue-700),var(--blue-600));color:var(--orange-300)}
@@ -652,7 +658,7 @@ body{opacity:1!important}
         
         <a href="#gallery" data-en="Work" data-hi="कार्य">Work</a>
         <a href="#faq" data-en="FAQ" data-hi="प्रश्न">FAQ</a>
-        <div id="google_translate_element" class="lang-widget"></div>
+        <button type="button" id="langBtn" class="lang-btn" aria-label="Change language">EN</button>
       </nav>
       <div class="nav-cta">
         <a class="btn btn--deep" href="https://wa.me/917398644158?text=Namaste%2C%20I%20want%20a%20Vastu%20consultation%20with%20VN%20Consultancy." target="_blank" rel="noopener">WhatsApp Us</a>
@@ -1304,6 +1310,24 @@ body{opacity:1!important}
     if(saved === "hi" || saved === "en") applyLang(saved);
   }catch(e){}
 
+  /* ---------- Language button (Google Translate) ---------- */
+  (function(){
+    var btn = document.getElementById("langBtn");
+    if(!btn) return;
+    var isHi = document.cookie.indexOf("googtrans=/en/hi") !== -1;
+    btn.textContent = isHi ? "HI" : "EN";
+    btn.addEventListener("click", function(){
+      if(isHi){
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + location.hostname;
+      } else {
+        document.cookie = "googtrans=/en/hi; path=/";
+        document.cookie = "googtrans=/en/hi; path=/; domain=" + location.hostname;
+      }
+      location.reload();
+    });
+  })();
+
   /* ---------- Mobile drawer ---------- */
   var burger = document.getElementById("burger");
   var menu   = document.getElementById("mobileMenu");
@@ -1597,6 +1621,7 @@ body{opacity:1!important}
 
 })();
 </script>
+<div id="google_translate_element" style="display:none"></div>
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
