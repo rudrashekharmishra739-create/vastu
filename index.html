@@ -561,6 +561,18 @@ footer .copy{border-color:rgba(239,96,36,.5)}
   .faq__item.open{box-shadow:none}
 }
 
+/* ---- Pill navigation (PillNav-inspired) ---- */
+.nav-links.pill-nav{display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:rgba(251,250,247,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(239,96,36,.35);box-shadow:var(--shadow-sm)}
+.nav-links.pill-nav a{padding:10px 16px;border-radius:999px;background:transparent;color:var(--ink-soft);font-weight:500;transition:.28s cubic-bezier(.22,.7,.3,1)}
+.nav-links.pill-nav a:hover{background:linear-gradient(180deg,var(--blue-700),var(--blue-600));color:var(--orange-300);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.nav-links.pill-nav a.active{background:linear-gradient(180deg,var(--blue-700),var(--blue-600));color:var(--orange-300)}
+/* remove old underline */
+.nav-links.pill-nav a::after{display:none}
+
+/* ---- Language toggle ---- */
+.lang-toggle{padding:6px 12px;border-radius:999px;border:1px solid rgba(239,96,36,.5);background:var(--blue-700);color:var(--orange-300);font-size:.78rem;font-weight:700;letter-spacing:.08em;transition:.25s;cursor:pointer}
+.lang-toggle:hover{background:var(--blue-600);transform:translateY(-1px)}
+
 /* ---- Mobile animation layer: touch-friendly motion ---- */
 @media (max-width:760px){
   .rv-d1,.rv-d2,.rv-d3{transition-delay:0s!important}
@@ -606,8 +618,9 @@ body{opacity:1!important}
 <header>
   <div class="topbar">
     <div class="wrap">
-      <span class="tb-l"><span class="tb-dot"></span>Home visits in Kanpur &nbsp;|&nbsp; Online consultations worldwide</span>
+      <span class="tb-l" id="topbarLeft" data-en="Home visits in Kanpur | Online consultations worldwide" data-hi="कानपुर में होम विज़िट | विश्वव्यापी ऑनलाइन परामर्श"><span class="tb-dot"></span>Home visits in Kanpur &nbsp;|&nbsp; Online consultations worldwide</span>
       <span class="tb-r">
+        <button type="button" id="langToggle" class="lang-toggle" aria-label="Change language">EN</button>
         <a href="tel:+917398644158">+91 7398 644 158</a>
         <a href="mailto:mishravarsha026@gmail.com">mishravarsha026@gmail.com</a>
       </span>
@@ -624,16 +637,16 @@ body{opacity:1!important}
           <span class="brand__sub">Vastu &bull; Numerology</span>
         </span>
       </a>
-      <nav class="nav-links" aria-label="Main">
-        <a href="#about">About</a>
-        <a href="#why">Why Vastu</a>
-        <a href="#services">Services</a>
-        <a href="#doshas">Doshas</a>
-        <a href="#process">Process</a>
-        <a href="#pricing">Packages</a>
+      <nav class="nav-links pill-nav" aria-label="Main">
+        <a href="#about" data-en="About" data-hi="परिचय">About</a>
+        <a href="#why" data-en="Why Vastu" data-hi="वास्तु क्यों">Why Vastu</a>
+        <a href="#services" data-en="Services" data-hi="सेवाएँ">Services</a>
+        <a href="#doshas" data-en="Doshas" data-hi="दोष">Doshas</a>
+        <a href="#process" data-en="Process" data-hi="प्रक्रिया">Process</a>
+        <a href="#pricing" data-en="Packages" data-hi="पैकेज">Packages</a>
         
-        <a href="#gallery">Work</a>
-        <a href="#faq">FAQ</a>
+        <a href="#gallery" data-en="Work" data-hi="कार्य">Work</a>
+        <a href="#faq" data-en="FAQ" data-hi="प्रश्न">FAQ</a>
       </nav>
       <div class="nav-cta">
         <a class="btn btn--deep" href="https://wa.me/917398644158?text=Namaste%2C%20I%20want%20a%20Vastu%20consultation%20with%20VN%20Consultancy." target="_blank" rel="noopener">WhatsApp Us</a>
@@ -647,15 +660,15 @@ body{opacity:1!important}
 <aside class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
   <button class="mm-close" id="mmClose" aria-label="Close menu">&times;</button>
   <nav>
-    <a href="#about">About Us</a>
-    <a href="#why">Why Vastu</a>
-    <a href="#services">Services</a>
-    <a href="#doshas">Common Doshas</a>
-    <a href="#process">Our Process</a>
-    <a href="#pricing">Packages</a>
-    <a href="#gallery">Our Work</a>
-    <a href="#faq">FAQ</a>
-    <a href="#contact">Book a Slot</a>
+    <a href="#about" data-en="About Us" data-hi="परिचय">About Us</a>
+    <a href="#why" data-en="Why Vastu" data-hi="वास्तु क्यों">Why Vastu</a>
+    <a href="#services" data-en="Services" data-hi="सेवाएँ">Services</a>
+    <a href="#doshas" data-en="Common Doshas" data-hi="सामान्य दोष">Common Doshas</a>
+    <a href="#process" data-en="Our Process" data-hi="हमारी प्रक्रिया">Our Process</a>
+    <a href="#pricing" data-en="Packages" data-hi="पैकेज">Packages</a>
+    <a href="#gallery" data-en="Our Work" data-hi="हमारा कार्य">Our Work</a>
+    <a href="#faq" data-en="FAQ" data-hi="प्रश्न">FAQ</a>
+    <a href="#contact" data-en="Book a Slot" data-hi="स्लॉट बुक करें">Book a Slot</a>
   </nav>
   <div class="mm-foot">
     <a class="btn btn--accent btn--block" href="tel:+917398644158">Call +91 7398 644 158</a>
@@ -683,8 +696,8 @@ body{opacity:1!important}
     <p class="hero__hindi">&ldquo;Naam ke anusar jeevan ka rahasya janiye&rdquo;<span>Know the secret of life according to your name</span></p>
     <p class="lead">Your name is not a label &mdash; it is a blueprint. At <strong>VN Consultancy</strong> we combine ancient Vastu Shastra (वास्तु शास्त्र) with modern Ank Ganit / Numerology to decode the energy of your name and your home, then correct exactly what is holding you back.</p>
     <div class="hero__actions">
-      <a class="btn btn--accent btn--lg btn--arr" href="#contact">Book Free 15-Min Talk</a>
-      <a class="btn btn--ghost btn--lg btn--arr" href="https://wa.me/917398644158?text=Namaste%2C%20I%20want%20to%20book%20a%20Vastu%20%2B%20Naam%20Analysis%20consultation.%20Please%20share%20the%20next%20available%20slot." target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <a class="btn btn--accent btn--lg btn--arr" href="#contact" data-en="Book Free 15-Min Talk" data-hi="15 मिनट फ्री टॉक बुक करें">Book Free 15-Min Talk</a>
+      <a class="btn btn--ghost btn--lg btn--arr" href="https://wa.me/917398644158?text=Namaste%2C%20I%20want%20to%20book%20a%20Vastu%20%2B%20Naam%20Analysis%20consultation.%20Please%20share%20the%20next%20available%20slot." target="_blank" rel="noopener" data-en="Chat on WhatsApp" data-hi="WhatsApp पर चैट करें">Chat on WhatsApp</a>
     </div>
     <div class="hero__trust">
       <span class="trust-pill"><b>100%</b> Confidential</span>
@@ -1263,6 +1276,27 @@ body{opacity:1!important}
   window.addEventListener("resize", onScroll);
   onScroll();
   toTop.addEventListener("click", function(){ window.scrollTo({top:0, behavior:"smooth"}); });
+
+  /* ---------- Language toggle ---------- */
+  var langToggle = document.getElementById("langToggle");
+  var currentLang = "en";
+  function applyLang(lang){
+    currentLang = lang;
+    document.documentElement.lang = (lang === "hi") ? "hi" : "en";
+    if(langToggle) langToggle.textContent = (lang === "hi") ? "HI" : "EN";
+    var nodes = document.querySelectorAll("[data-en][data-hi]");
+    Array.prototype.forEach.call(nodes, function(el){
+      el.textContent = (lang === "hi") ? el.getAttribute("data-hi") : el.getAttribute("data-en");
+    });
+    try{ localStorage.setItem("vn-lang", lang); }catch(e){}
+  }
+  if(langToggle){
+    langToggle.addEventListener("click", function(){ applyLang(currentLang === "en" ? "hi" : "en"); });
+  }
+  try{
+    var saved = localStorage.getItem("vn-lang");
+    if(saved === "hi" || saved === "en") applyLang(saved);
+  }catch(e){}
 
   /* ---------- Mobile drawer ---------- */
   var burger = document.getElementById("burger");
