@@ -569,9 +569,15 @@ footer .copy{border-color:rgba(239,96,36,.5)}
 /* remove old underline */
 .nav-links.pill-nav a::after{display:none}
 
-/* ---- Language toggle ---- */
-.lang-toggle{padding:6px 12px;border-radius:999px;border:1px solid rgba(239,96,36,.5);background:var(--blue-700);color:var(--orange-300);font-size:.78rem;font-weight:700;letter-spacing:.08em;transition:.25s;cursor:pointer}
-.lang-toggle:hover{background:var(--blue-600);transform:translateY(-1px)}
+/* ---- Language toggle (Google Translate) ---- */
+.lang-widget{display:inline-flex;align-items:center}
+.goog-te-gadget-simple{background:linear-gradient(180deg,var(--blue-700),var(--blue-600))!important;border:1px solid rgba(239,96,36,.5)!important;border-radius:999px!important;padding:6px 12px!important;font-size:.78rem!important;font-family:var(--sans)!important;color:var(--orange-300)!important;cursor:pointer!important}
+.goog-te-gadget-simple .goog-te-menu-value{color:var(--orange-300)!important}
+.goog-te-gadget-simple .goog-te-menu-value span{color:var(--orange-300)!important}
+.goog-te-banner-frame.skiptranslate{display:none!important}
+body{top:0!important}
+.goog-tooltip,.goog-tooltip:hover{display:none!important}
+.goog-text-highlight{background:none!important;box-shadow:none!important}
 
 /* ---- Mobile animation layer: touch-friendly motion ---- */
 @media (max-width:760px){
@@ -620,7 +626,6 @@ body{opacity:1!important}
     <div class="wrap">
       <span class="tb-l" id="topbarLeft" data-en="Home visits in Kanpur | Online consultations worldwide" data-hi="कानपुर में होम विज़िट | विश्वव्यापी ऑनलाइन परामर्श"><span class="tb-dot"></span>Home visits in Kanpur &nbsp;|&nbsp; Online consultations worldwide</span>
       <span class="tb-r">
-        <button type="button" id="langToggle" class="lang-toggle" aria-label="Change language">EN</button>
         <a href="tel:+917398644158">+91 7398 644 158</a>
         <a href="mailto:mishravarsha026@gmail.com">mishravarsha026@gmail.com</a>
       </span>
@@ -647,6 +652,7 @@ body{opacity:1!important}
         
         <a href="#gallery" data-en="Work" data-hi="कार्य">Work</a>
         <a href="#faq" data-en="FAQ" data-hi="प्रश्न">FAQ</a>
+        <div id="google_translate_element" class="lang-widget"></div>
       </nav>
       <div class="nav-cta">
         <a class="btn btn--deep" href="https://wa.me/917398644158?text=Namaste%2C%20I%20want%20a%20Vastu%20consultation%20with%20VN%20Consultancy." target="_blank" rel="noopener">WhatsApp Us</a>
@@ -1591,6 +1597,17 @@ body{opacity:1!important}
 
 })();
 </script>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,hi',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
 
