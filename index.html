@@ -569,6 +569,7 @@ footer .copy{border-color:rgba(239,96,36,.5)}
 .nav-links.pill-nav a{padding:10px 16px;border-radius:999px;background:transparent;color:var(--ink-soft);font-weight:500;transition:.28s cubic-bezier(.22,.7,.3,1);white-space:nowrap}
 .lang-btn{padding:8px 12px;border-radius:999px;border:1px solid rgba(239,96,36,.5);background:linear-gradient(180deg,var(--blue-700),var(--blue-600));color:var(--orange-300);font-size:.78rem;font-weight:700;letter-spacing:.08em;cursor:pointer;transition:.25s;white-space:nowrap}
 .lang-btn:hover{transform:translateY(-1px)}
+.fbtn--lang{background:linear-gradient(180deg,var(--blue-700),var(--blue-600));color:var(--orange-300);font-weight:700;font-size:.85rem;border:1.5px solid var(--orange-500)}
 .nav-links.pill-nav a{padding:10px 16px;border-radius:999px;background:transparent;color:var(--ink-soft);font-weight:500;transition:.28s cubic-bezier(.22,.7,.3,1)}
 .nav-links.pill-nav a:hover{background:linear-gradient(180deg,var(--blue-700),var(--blue-600));color:var(--orange-300);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
 .nav-links.pill-nav a.active{background:linear-gradient(180deg,var(--blue-700),var(--blue-600));color:var(--orange-300)}
@@ -1246,6 +1247,7 @@ body{opacity:1!important}
 
 <!-- ================= FLOATING BUTTONS ================= -->
 <div class="float">
+  <button class="fbtn fbtn--lang" id="langFloat" aria-label="Change language">EN</button>
   <button class="fbtn fbtn--top" id="toTop" aria-label="Back to top"><svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg></button>
   <a class="fbtn fbtn--wa pulse" href="https://wa.me/917398644158?text=Namaste%2C%20I%20want%20a%20Vastu%20%2B%20Naam%20Analysis%20consultation%20with%20VN%20Consultancy." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1120.2 12 8.2 8.2 0 0112 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5 0a6.7 6.7 0 01-2-1.2 7.5 7.5 0 01-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.5.3-.5v-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 00-.7.3A2.9 2.9 0 006.9 12a5.1 5.1 0 001.1 2.7 11.6 11.6 0 004.4 3.9c1.6.6 2.2.7 3 .6a2.6 2.6 0 001.7-1.2 2.1 2.1 0 00.1-1.2z"/></svg>
@@ -1312,11 +1314,13 @@ body{opacity:1!important}
 
   /* ---------- Language button (Google Translate) ---------- */
   (function(){
-    var btn = document.getElementById("langBtn");
-    if(!btn) return;
     var isHi = document.cookie.indexOf("googtrans=/en/hi") !== -1;
-    btn.textContent = isHi ? "HI" : "EN";
-    btn.addEventListener("click", function(){
+    var label = isHi ? "HI" : "EN";
+    var btn = document.getElementById("langBtn");
+    if(btn){ btn.textContent = label; btn.addEventListener("click", toggleLang); }
+    var flt = document.getElementById("langFloat");
+    if(flt){ flt.textContent = label; flt.addEventListener("click", toggleLang); }
+    function toggleLang(){
       if(isHi){
         document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + location.hostname;
@@ -1325,7 +1329,7 @@ body{opacity:1!important}
         document.cookie = "googtrans=/en/hi; path=/; domain=" + location.hostname;
       }
       location.reload();
-    });
+    }
   })();
 
   /* ---------- Mobile drawer ---------- */
