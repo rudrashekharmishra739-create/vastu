@@ -199,8 +199,9 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000}
 .about__badge span{font-size:.67rem;letter-spacing:.18em;text-transform:uppercase}
 .about__float{position:absolute;left:-22px;top:40px;background:var(--cream);border:1px solid rgba(239,96,36,.5);border-radius:var(--radius);padding:13px 17px;box-shadow:var(--shadow-sm);font-size:.82rem;display:flex;gap:10px;align-items:center}
 .lead-text{font-size:1.05rem;color:var(--ink-soft);font-weight:300}
-.quote{font-family:var(--serif2);font-size:1.25rem;font-style:italic;color:var(--blue-700);border-left:3px solid var(--orange-500);padding:6px 0 6px 24px;margin:26px 0}
-.quote footer{font-family:var(--sans);font-size:.8rem;font-style:normal;color:#5A6A72;margin-top:10px;line-height:1.6}
+.quote{font-family:var(--serif2);font-size:1.25rem;font-style:italic;color:var(--blue-700);text-align:center;margin:26px 0;padding:22px 26px;border-radius:var(--radius-lg);background:linear-gradient(145deg,rgba(10,70,102,.07),rgba(239,96,36,.08));border:1px solid rgba(239,96,36,.3);box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.quote::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(239,96,36,.12),transparent 60%);pointer-events:none}
+.quote footer{display:block;font-family:var(--serif2);font-size:1.12rem;font-style:italic;font-weight:500;color:var(--blue-600);margin-top:14px;line-height:1.6;text-align:center;letter-spacing:.2px}
 
 .checklist{display:grid;gap:14px;margin:24px 0 32px}
 .checklist li{display:flex;gap:13px;align-items:flex-start;font-size:.96rem;color:var(--ink-soft)}
@@ -561,12 +562,34 @@ footer .copy{border-color:rgba(239,96,36,.5)}
   .faq__item.open{box-shadow:none}
 }
 
+/* ---- Mobile animation layer: touch-friendly motion ---- */
+@media (max-width:760px){
+  .rv-d1,.rv-d2,.rv-d3{transition-delay:0s!important}
+  .hero__grid.is-in > *{transition-duration:.5s}
+  .hero__rings span{animation:mobileRingPulse 5s ease-in-out infinite}
+  .card,.plan,.dosha__item,.fitem,.gloss,.gal__item{will-change:transform,opacity}
+}
+@keyframes mobileRingPulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.06);opacity:.9}}
+@media (hover:none){
+  .card,.plan,.dosha__item,.fitem,.gloss,.gal__item{
+    transition:transform .32s cubic-bezier(.22,.7,.3,1),box-shadow .32s ease,opacity .32s ease;
+  }
+  .card:active,.plan:active,.dosha__item:active,.fitem:active,.gloss:active,.gal__item:active{
+    transform:translateY(-5px) scale(.985);
+    box-shadow:var(--shadow);
+  }
+  .btn:active{transform:translateY(0) scale(.96)}
+  .btn--accent{animation:mobileBtnPulse 2.4s ease-in-out infinite}
+}
+@keyframes mobileBtnPulse{0%,100%{box-shadow:var(--shadow-accent)}50%{box-shadow:0 18px 50px rgba(239,96,36,.55)}}
+
 /* ---- Reduced motion: kill everything decorative ---- */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .rv,.hero__grid > *,.foot-grid > div,.foot-bottom{opacity:1!important;transform:none!important}
   .plx,.tiltable{transform:none!important;will-change:auto}
   .gal__item .view{opacity:1;transform:none}
+  .hero__rings span,.btn--accent{animation:none!important}
 }
 </style>
 <noscript><style>
